@@ -1,29 +1,27 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: javawebappbluedeployment
+  name: flaskwebapp-blue-deployment  
 spec:
   replicas: 2
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: java-web-app
+      app: flask-web-app
       version: v1
       color: blue
   template:
     metadata:
-      name: javawebapppod
+      name: flaskwebapp-pod           
       labels:
-        app: java-web-app
+        app: flask-web-app
         version: v1
         color: blue
     spec:
       containers:
-      - name: javawebappcontainer
-        image: ashokit/javawebapp
+      - name: flaskwebapp-container
+        image: sudhirkoche/flask-employee:v1
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
-...
+        - containerPort: 5000
