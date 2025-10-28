@@ -1,29 +1,39 @@
 ---
-    apiVersion: apps/v1
-    kind: Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskwebapp-green-deployment
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: flask-web-app
+      version: v2
+      color: green
+  template:
     metadata:
-      name: flaskwebapp-green-deployment
+      labels:
+        app: flask-web-app
+        version: v2
+        color: green
     spec:
-      replicas: 2
-      strategy:
-        type: RollingUpdate
-      selector:
-        matchLabels:
-          app: flask-web-app
-          version: v2
-          color: green
-      template:
-        metadata:
-          name: flaskwebapppod
-          labels:
-            app: flask-web-app
-            version: v2
-            color: green
-        spec:
-          containers:
-          - name: flaskwebapp-container
-            image: sudhirkoche/flask-employee:v4
-            imagePullPolicy: Always
-            ports:
-            - containerPort: 5000
+      containers:
+      - name: flaskwebapp-container
+        image: sudhirkoche/flask-employee:v4
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DB_HOST
+          value: mysqlservice
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_NAME
+          value: employee_db
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          value: root
 ...

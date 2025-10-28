@@ -8,10 +8,10 @@ spec:
   selector:
     app: flask-web-app
     version: v2
-    color: green        # ✅ routes only to Green pods; change to blue when switching
+    color: green        
   ports:
     - name: http
-      port: 80          # Service port (inside cluster)
-      targetPort: 5000  # Container port (inside pod)
-      nodePort: 30080   # ✅ External port (accessible via <NodeIP>:30080)
+      port: 80          
+      targetPort: 5000  
+      nodePort: 30080   
 ...

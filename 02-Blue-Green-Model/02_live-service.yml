@@ -2,15 +2,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: flaskwebapp-live-service   # ✅ clearer naming convention
+  name: flaskwebapp-live-service
 spec:
   type: LoadBalancer
   selector:
-    app: flask-web-app             # ✅ must match deployment label
+    app: flask-web-app
     version: v1
-    color: blue                    # ✅ include color to target blue pods only
+    color: blue
   ports:
-    - port: 80
-      targetPort: 5000             # ✅ matches your containerPort (5000)
-
+    - name: http
+      port: 80
+      targetPort: 5000
 ...
