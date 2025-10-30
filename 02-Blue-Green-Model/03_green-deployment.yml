@@ -26,14 +26,17 @@ spec:
         ports:
         - containerPort: 5000
         env:
-        - name: DB_HOST
-          value: mysqlservice
-        - name: DB_PORT
+        - name: DB_ENABLED            # if you used the toggle I shared earlier
+          value: "true"
+        - name: MYSQL_HOST
+          value: "mysqlservice"       # must match the Service metadata.name
+        - name: MYSQL_PORT
           value: "3306"
-        - name: DB_NAME
-          value: employee_db
-        - name: DB_USER
-          value: root
-        - name: DB_PASSWORD
-          value: root
+        - name: MYSQL_DB
+          value: "employee_db"
+        - name: MYSQL_USER
+          value: "root"               # better via Secret
+        - name: MYSQL_PASSWORD
+          value: "root"               # better via Secret
+       
 ...
